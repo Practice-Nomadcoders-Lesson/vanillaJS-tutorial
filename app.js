@@ -12,14 +12,17 @@ const USERNAME_KEY = "username";
 
 function onLoginSubmit(event) {
   event.preventDefault(); //4.2 Events
-  loginForm.classList.add(HIDDEN_CLASSNAME);
-  localStorage.setItem(USERNAME_KEY, loginInput.value); //4.5
-  paintGreetings(); // 4.6
+  const username = loginInput.value;
+  loginForm.classList.add(HIDDEN_CLASSNAME); //4.4
+  //greeting.innerText = "Hello " + username;
+  localStorage.setItem(USERNAME_KEY, username); //4.5
+  //greeting.innerText = `Hello ${username}`; //4.4
+  //greeting.classList.remove(HIDDEN_CLASSNAME); //4.4
+  paintGreetings(username); // 4.6
 }
 
 //반복되는 동작을 함수로 만들기 - 4.6
-function paintGreetings() {
-  const username = localStorage.getItem(USERNAME_KEY);
+function paintGreetings(username) {
   greeting.innerText = `Hello ${username}`;
   greeting.classList.remove(HIDDEN_CLASSNAME);
 }
@@ -31,5 +34,7 @@ if (savedUsername === null) {
   loginForm.classList.remove(HIDDEN_CLASSNAME);
   loginForm.addEventListener("submit", onLoginSubmit);
 } else {
-  paintGreetings(); // 4.6
+  //greeting.classList.remove(HIDDEN_CLASSNAME);
+  //greeting.innerText = `Hello ${savedUsername}`;
+  paintGreetings(savedUsername); // 4.6
 }
